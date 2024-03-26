@@ -58,10 +58,19 @@ dict2 = {'b': 3, 'c': 4}
 
 #This creates a new dictionary without modifying the originals.
 merged_dict = dict1 | dict2
-
+print("INVERTED GRADES")
 grades = {'Anna': 'A', 'Bob': 'B', 'Charlie': 'C'}
-invertedGrades = {value: key for key, value in grades.items()}
-print(invertedGrades)
+#invertedGrades = {value: key for key, value in grades.items()}
+
+def invertGrades(grades):
+    invertedGrades = {}
+    for key,value in grades.items():
+        invertedGrades[value] = key
+    return invertedGrades
+
+print(invertGrades(grades))
+
+# print(invertedGrades)
 
 
 items = {'apples': 5, 'bananas': 8, 'grapes': 12}
@@ -97,30 +106,131 @@ studentList.append({"name":"john","grade":7})
 studentList.append(5)
 
 print(studentList)
-
-names = ['Alice', 'Bob', 'Charlie', 'David']
-professions = ['Engineer', 'Doctor', 'Artist',"Driver","Pilot"]
+print("PROFESSIONS EXAMPLE")
+names = ['Alice', 'Bob', 'Charlie', 'David'] #4
+professions = ['Engineer', 'Doctor', 'Artist',"Driver","Musician"] #4
 professionsDict = {}
 for index,job in enumerate(professions):
-    if index<len(names):
+    print(index,job)
+    if(index<len(names)):
         professionsDict[job]=names[index]
+
 
 
 
 print(professionsDict)
 #programmatically write a string like "Index: 0, value: apple"    (enumerate)
 my_list = ['apple', 'banana', 'cherry']
+
+
+
+
+# def writeAStringFromList(myList):
+    # for index,fruit in enumerate(myList):
+    #     print(f"index: {index}, value: {fruit}")
+
+# writeAStringFromList(my_list)
+
+#enumerate gives indexes to iterrables (list)
+for index,fruit in enumerate(my_list,start=1):
+    print(f"index: {index}, value: {fruit}")
+
+for index in range(0,len(my_list)):
+    print(f"index: {index}, value: {my_list[index]}")
+
+
 #write a function that takes a day as an argument and returns list of fruit sold on that day
 #example output ["apples","oranges"]
-exerciseList = [{'apples': "tuesday", 'bananas': "friday"}, {'apples': "tuesday", 'oranges': "thursday"}, {'bananas': "friday", 'cherries': "wednesday"}]
+exerciseList = [
+    {'apples': "tuesday", 'bananas': "friday"},
+    {'apples': "tuesday", 'oranges': "thursday"},
+    {'pineapples': "friday", 'cherries': "wednesday"}]
+
+
+def fruitsSoldOnDay(day,list):
+    fruitsSoldOnSpecificDay = []
+    for fruitRecord in list:
+        print("fruit record",fruitRecord)
+        for fruit, saleDay in fruitRecord.items():
+            print(fruit,saleDay)
+            if(saleDay.lower() == day.lower()):
+                fruitsSoldOnSpecificDay.append(fruit)
+
+    return fruitsSoldOnSpecificDay
+
+
+catalogue = fruitsSoldOnDay("friday",exerciseList)
+
+print(catalogue)
+
 #merge in a dictionary -> zip
 #example output {"name":"Alice","age":25.....
-keys = ['name', 'age', 'city']
-values = ['Alice', 25, 'New York']
+keys = ['name', 'age', 'city'] #keys
+values = ['Alice', 25, 'New York'] #values
+
+def createDictionaryFromLists(keys,values):
+    result = {}
+    for index in range(0,len(keys)): #0-3
+        result[keys[index]] = values[index]
+
+    print(result)
+
+createDictionaryFromLists(keys,values)
+
+
+
+
+
+
+
+
+
+
+
 #create a dictionary from a nested list
-nested_list = [['name', 'Alice'], ['age', 25], ['city', 'New York']]
+nested_list = [
+    ['name', 'Alice'],
+    ['age', 25],
+    ['city', 'New York']
+]
+
+print("NESTED LIST EX")
+def createDictionaryFromNestedList(nested):
+    resultDict ={}
+    for pair in nested:
+        print(pair)
+        key = pair[0]
+        value = pair[1]
+        resultDict[key] = value
+    return resultDict
+
+
+resultDict = createDictionaryFromNestedList(nested_list)
+
+print(resultDict)
+
+
+
+
+
 #example output {"name":"Alice","age":25.....
 #extra exercise
 #count vowels but count each vowel
-#example -> hello word -> {"e":1,"o":1} -> if key exists update it , if it doesnt exist, create it, "aeouiAEOUI"
+#example -> hello word -> {"e":1,"o":2} -> if key exists update it , if it doesnt exist, create it, "aeouiAEOUI"
 #can work on any String
+
+def countVowels(s):
+    vowels = "aeouiAEOUI"
+    vowelsDict = {}
+
+
+    for char in s:
+        if char in vowels:
+            if char.lower() in vowelsDict:
+                vowelsDict[char.lower()] +=1
+            else:
+                vowelsDict[char.lower()] = 1
+    return vowelsDict
+
+print(countVowels("hello world"))
+
